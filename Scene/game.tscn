@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://bxf43yjw1ya1e"]
+
+[ext_resource type="Script" uid="uid://de66qrc6272on" path="res://Scene/ricky.gd" id="1_4jv7b"]
+[ext_resource type="Texture2D" uid="uid://bauowoica83ii" path="res://Assets/Characters/Ricky/Ricky.png" id="1_mhtsl"]
+[ext_resource type="Texture2D" uid="uid://enpxi7163t5g" path="res://Assets/Characters/Ricky/Ricky walk.png" id="3_03iqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w51g1"]
+atlas = ExtResource("1_mhtsl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jv7b"]
+atlas = ExtResource("1_mhtsl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03iqk"]
+atlas = ExtResource("1_mhtsl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihreq"]
+atlas = ExtResource("1_mhtsl")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thj8p"]
+atlas = ExtResource("1_mhtsl")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8jt7"]
+atlas = ExtResource("3_03iqk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sagxc"]
+atlas = ExtResource("3_03iqk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f6ah"]
+atlas = ExtResource("3_03iqk")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twwsd"]
+atlas = ExtResource("3_03iqk")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6b8m"]
+atlas = ExtResource("3_03iqk")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8jt7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w51g1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jv7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03iqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihreq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thj8p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8jt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sagxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f6ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twwsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6b8m")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8f6ah"]
+radius = 82.006096
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sagxc"]
+size = Vector2(143, 80)
+
+[node name="Game" type="Node2D" unique_id=676777073]
+
+[node name="Ricky" type="CharacterBody2D" parent="." unique_id=1850632499]
+script = ExtResource("1_4jv7b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ricky" unique_id=1341087278]
+position = Vector2(151.00002, 154)
+scale = Vector2(10.4375, 9.749999)
+sprite_frames = SubResource("SpriteFrames_h8jt7")
+animation = &"walk"
+frame_progress = 0.52843606
+
+[node name="Hitbox" type="CollisionShape2D" parent="Ricky" unique_id=758881213]
+position = Vector2(107, 155)
+shape = SubResource("CircleShape2D_8f6ah")
+
+[node name="Hitbox2" type="CollisionShape2D" parent="Ricky" unique_id=664162839]
+position = Vector2(242, 139)
+shape = SubResource("RectangleShape2D_sagxc")
