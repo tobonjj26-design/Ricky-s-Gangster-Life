@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var SPEED = 300.0
-var JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -350.0
 
 @onready var anim = $AnimatedSprite2D
 

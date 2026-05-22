@@ -1,8 +1,12 @@
-[gd_scene format=3 uid="uid://bxf43yjw1ya1e"]
+[gd_scene format=4 uid="uid://bxf43yjw1ya1e"]
 
 [ext_resource type="Script" uid="uid://de66qrc6272on" path="res://Scene/ricky.gd" id="1_4jv7b"]
 [ext_resource type="Texture2D" uid="uid://bauowoica83ii" path="res://Assets/Characters/Ricky/Ricky.png" id="1_mhtsl"]
 [ext_resource type="Texture2D" uid="uid://enpxi7163t5g" path="res://Assets/Characters/Ricky/Ricky walk.png" id="3_03iqk"]
+[ext_resource type="Texture2D" uid="uid://cr1qe3d7oxbb0" path="res://Assets/Tilesets/New Piskel (1).png" id="4_03iqk"]
+[ext_resource type="Texture2D" uid="uid://b5837qcjlc8qv" path="res://Assets/Tilesets/New Piskel.png" id="5_ihreq"]
+[ext_resource type="Texture2D" uid="uid://d2maqq30p4ovg" path="res://Assets/Objects/Bullet.png" id="6_thj8p"]
+[ext_resource type="PackedScene" uid="uid://bai34ehtk8i0w" path="res://Scene/timmy.tscn" id="7_h8jt7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w51g1"]
 atlas = ExtResource("1_mhtsl")
@@ -87,28 +91,81 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8f6ah"]
-radius = 82.006096
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h8jt7"]
+radius = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sagxc"]
-size = Vector2(143, 80)
+size = Vector2(14, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihreq"]
+texture = ExtResource("4_03iqk")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thj8p"]
+texture = ExtResource("5_ihreq")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_thj8p"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_ihreq")
+sources/3 = SubResource("TileSetAtlasSource_thj8p")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8jt7"]
+size = Vector2(8, 4.5)
 
 [node name="Game" type="Node2D" unique_id=676777073]
+metadata/_edit_horizontal_guides_ = [130.0, 178.0, 205.0]
 
 [node name="Ricky" type="CharacterBody2D" parent="." unique_id=1850632499]
 script = ExtResource("1_4jv7b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ricky" unique_id=1341087278]
-position = Vector2(151.00002, 154)
-scale = Vector2(10.4375, 9.749999)
+position = Vector2(77.00001, 240.00002)
+scale = Vector2(1.6250004, 1.6132817)
 sprite_frames = SubResource("SpriteFrames_h8jt7")
 animation = &"walk"
 frame_progress = 0.52843606
 
 [node name="Hitbox" type="CollisionShape2D" parent="Ricky" unique_id=758881213]
-position = Vector2(107, 155)
-shape = SubResource("CircleShape2D_8f6ah")
+position = Vector2(71, 241)
+shape = SubResource("CapsuleShape2D_h8jt7")
 
-[node name="Hitbox2" type="CollisionShape2D" parent="Ricky" unique_id=664162839]
-position = Vector2(242, 139)
+[node name="Camera2D" type="Camera2D" parent="Ricky" unique_id=1340571077]
+position = Vector2(71, 241)
+zoom = Vector2(3.5, 3.5)
+
+[node name="Gun Hitbox" type="CollisionShape2D" parent="Ricky" unique_id=153927255]
+position = Vector2(96, 237)
 shape = SubResource("RectangleShape2D_sagxc")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=124960976]
+tile_map_data = PackedByteArray("AAAEABAAAQABAAAAAAAFABAAAQAAAAAAAAAGABAAAQABAAAAAAAHABAAAQAAAAAAAAACABAAAQABAAAAAAADABAAAQAAAAAAAAD5/xAAAQAAAAAAAAD6/xAAAQABAAAAAAD7/xAAAQAAAAAAAAD8/xAAAQABAAAAAAD9/xAAAQAAAAAAAAD+/xAAAQABAAAAAAD//xAAAQAAAAAAAAAAABAAAQABAAAAAAABABAAAQAAAAAAAAAIABAAAQABAAAAAAAJABAAAQAAAAAAAAAKABAAAQABAAAAAAALABAAAQAAAAAAAAAMABAAAQABAAAAAAANABAAAQAAAAAAAAAOABAAAQABAAAAAAD5/xEAAwAAAAAAAAD5/xIAAwAAAAEAAAD6/xEAAwABAAAAAAD6/xIAAwABAAEAAAD5/xMAAwAAAAAAAAD5/xQAAwAAAAEAAAD6/xMAAwABAAAAAAD6/xQAAwABAAEAAAD5/xUAAwAAAAAAAAD5/xYAAwAAAAEAAAD6/xUAAwABAAAAAAD6/xYAAwABAAEAAAD5/xcAAwAAAAAAAAD6/xcAAwABAAAAAAD7/xEAAwAAAAAAAAD7/xIAAwAAAAEAAAD8/xEAAwABAAAAAAD8/xIAAwABAAEAAAD7/xMAAwAAAAAAAAD7/xQAAwAAAAEAAAD8/xMAAwABAAAAAAD8/xQAAwABAAEAAAD7/xUAAwAAAAAAAAD7/xYAAwAAAAEAAAD8/xUAAwABAAAAAAD8/xYAAwABAAEAAAD7/xcAAwAAAAAAAAD8/xcAAwABAAAAAAD9/xEAAwAAAAAAAAD9/xIAAwAAAAEAAAD+/xEAAwABAAAAAAD+/xIAAwABAAEAAAD9/xMAAwAAAAAAAAD9/xQAAwAAAAEAAAD+/xMAAwABAAAAAAD+/xQAAwABAAEAAAD9/xUAAwAAAAAAAAD9/xYAAwAAAAEAAAD+/xUAAwABAAAAAAD+/xYAAwABAAEAAAD9/xcAAwAAAAAAAAD+/xcAAwABAAAAAAD//xEAAwAAAAAAAAD//xIAAwAAAAEAAAAAABEAAwABAAAAAAAAABIAAwABAAEAAAD//xMAAwAAAAAAAAD//xQAAwAAAAEAAAAAABMAAwABAAAAAAAAABQAAwABAAEAAAD//xUAAwAAAAAAAAD//xYAAwAAAAEAAAAAABUAAwABAAAAAAAAABYAAwABAAEAAAD//xcAAwAAAAAAAAAAABcAAwABAAAAAAABABEAAwAAAAAAAAABABIAAwAAAAEAAAACABEAAwABAAAAAAACABIAAwABAAEAAAABABMAAwAAAAAAAAABABQAAwAAAAEAAAACABMAAwABAAAAAAACABQAAwABAAEAAAABABUAAwAAAAAAAAABABYAAwAAAAEAAAACABUAAwABAAAAAAACABYAAwABAAEAAAABABcAAwAAAAAAAAACABcAAwABAAAAAAADABEAAwAAAAAAAAADABIAAwAAAAEAAAAEABEAAwABAAAAAAAEABIAAwABAAEAAAADABMAAwAAAAAAAAADABQAAwAAAAEAAAAEABMAAwABAAAAAAAEABQAAwABAAEAAAADABUAAwAAAAAAAAADABYAAwAAAAEAAAAEABUAAwABAAAAAAAEABYAAwABAAEAAAADABcAAwAAAAAAAAAEABcAAwABAAAAAAAFABEAAwAAAAAAAAAFABIAAwAAAAEAAAAGABEAAwABAAAAAAAGABIAAwABAAEAAAAFABMAAwAAAAAAAAAFABQAAwAAAAEAAAAGABMAAwABAAAAAAAGABQAAwABAAEAAAAFABUAAwAAAAAAAAAFABYAAwAAAAEAAAAGABUAAwABAAAAAAAGABYAAwABAAEAAAAFABcAAwAAAAAAAAAGABcAAwABAAAAAAAHABEAAwAAAAAAAAAHABIAAwAAAAEAAAAIABEAAwABAAAAAAAIABIAAwABAAEAAAAHABMAAwAAAAAAAAAHABQAAwAAAAEAAAAIABMAAwABAAAAAAAIABQAAwABAAEAAAAHABUAAwAAAAAAAAAHABYAAwAAAAEAAAAIABUAAwABAAAAAAAIABYAAwABAAEAAAAHABcAAwAAAAAAAAAIABcAAwABAAAAAAAJABEAAwAAAAAAAAAJABIAAwAAAAEAAAAKABEAAwABAAAAAAAKABIAAwABAAEAAAAJABMAAwAAAAAAAAAJABQAAwAAAAEAAAAKABMAAwABAAAAAAAKABQAAwABAAEAAAAJABUAAwAAAAAAAAAJABYAAwAAAAEAAAAKABUAAwABAAAAAAAKABYAAwABAAEAAAAJABcAAwAAAAAAAAAKABcAAwABAAAAAAALABEAAwAAAAAAAAALABIAAwAAAAEAAAAMABEAAwABAAAAAAAMABIAAwABAAEAAAALABMAAwAAAAAAAAALABQAAwAAAAEAAAAMABMAAwABAAAAAAAMABQAAwABAAEAAAALABUAAwAAAAAAAAALABYAAwAAAAEAAAAMABUAAwABAAAAAAAMABYAAwABAAEAAAALABcAAwAAAAAAAAAMABcAAwABAAAAAAANABEAAwAAAAAAAAANABIAAwAAAAEAAAAOABEAAwABAAAAAAAOABIAAwABAAEAAAANABMAAwAAAAAAAAANABQAAwAAAAEAAAAOABMAAwABAAAAAAAOABQAAwABAAEAAAANABUAAwAAAAAAAAANABYAAwAAAAEAAAAOABUAAwABAAAAAAAOABYAAwABAAEAAAANABcAAwAAAAAAAAAOABcAAwABAAAAAAA=")
+tile_set = SubResource("TileSet_thj8p")
+
+[node name="Bullet" type="RigidBody2D" parent="." unique_id=1817136528]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet" unique_id=1741951358]
+position = Vector2(112, 232.25)
+shape = SubResource("RectangleShape2D_h8jt7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet" unique_id=1124179227]
+position = Vector2(117.25, 231.87498)
+scale = Vector2(0.98437464, 0.86718714)
+texture = ExtResource("6_thj8p")
+
+[node name="Timmy" parent="." unique_id=686268234 instance=ExtResource("7_h8jt7")]
+position = Vector2(-43, 73)
