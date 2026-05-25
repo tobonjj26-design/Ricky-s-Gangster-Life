@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbxf8pf6qi18i"
-path="res://.godot/imported/Timmy.png-1d54cd54a8d6af98037ade32f3301876.ctex"
+uid="uid://q538n4i36j0y"
+path="res://.godot/imported/Timmy (1).png-5ae351c0ad17893e91151530fe82e4b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Timmy/Timmy.png"
-dest_files=["res://.godot/imported/Timmy.png-1d54cd54a8d6af98037ade32f3301876.ctex"]
+source_file="res://Assets/Characters/Timmy/Timmy (1).png"
+dest_files=["res://.godot/imported/Timmy (1).png-5ae351c0ad17893e91151530fe82e4b2.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8b27qp2tjhht"
-path="res://.godot/imported/Timmy enojado.png-5b26cb01f48a3f69409cfc37980b9094.ctex"
+uid="uid://b6rb57sqpr3ks"
+path="res://.godot/imported/Timmy enojado (1).png-01e131a434ac2fbea9abcefa208b0428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Timmy/Timmy enojado.png"
-dest_files=["res://.godot/imported/Timmy enojado.png-5b26cb01f48a3f69409cfc37980b9094.ctex"]
+source_file="res://Assets/Characters/Timmy/Timmy enojado (1).png"
+dest_files=["res://.godot/imported/Timmy enojado (1).png-01e131a434ac2fbea9abcefa208b0428.ctex"]
 
 [params]
 
