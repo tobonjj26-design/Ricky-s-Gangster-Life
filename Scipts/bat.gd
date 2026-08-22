@@ -1,24 +1,24 @@
 extends Area2D
 
-# Script del murciélago que lanza Timmy.
-# El murciélago aparece estático en frente de Timmy y solo se usa como efecto.
+# Script del bate que lanza Timmy.
+# El bate aparece estático en frente de Timmy y solo se usa como efecto.
 
 @onready var anim = $AnimatedSprite2D
 
-# Dirección del murciélago: true = izquierda, false = derecha.
+# Dirección del bate: true = izquierda, false = derecha.
 @export var facing_left = false
 
-# Ajusta esto según cómo esté dibujado el sprite del murciélago por defecto.
+# Ajusta esto según cómo esté dibujado el sprite del bate por defecto.
 # true = el sprite original mira a la derecha.
 const SPRITE_DEFAULT_FACING_RIGHT = true
-# Daño que hace el murciélago al impactar.
+# Daño que hace el bate al impactar.
 const BAT_DAMAGE = 10
-# Frame en el que el bat puede hacer daño (0 = primer frame, 2 = tercer frame).
-const DAMAGE_FRAME = 2
+# Frames en los que el bate puede hacer daño (0 = primer frame, 2 = tercer frame).
+const DAMAGE_FRAMES = [2, 3]
 # Delay antes de que el golpe pueda hacerse efectivo.
 # Se aumentó para dar al jugador más tiempo de esquivar.
 const DAMAGE_ACTIVATION_DELAY = 0.9
-# Tiempo extra que el bat dura después de finalizar la animación.
+# Tiempo extra que el bate dura después de finalizar la animación.
 # Se usa adicionalmente para mantenerlo visible tras el Swing.
 const BAT_LIFETIME_AFTER_SWING = 1.5
 
@@ -27,7 +27,7 @@ var damage_done = false
 var damage_enabled = false
 
 func _ready():
-	# Se ejecuta cuando aparece el murciélago.
+	# Se ejecuta cuando aparece el bate.
 	update_sprite_direction()
 	anim.play("Swing")
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -42,22 +42,22 @@ func update_sprite_direction():
 	anim.flip_h = sprite_should_face_left if SPRITE_DEFAULT_FACING_RIGHT else not sprite_should_face_left
 
 func _on_body_entered(body):
-	# Guarda los cuerpos que están dentro del área del bat.
+	# Guarda los cuerpos que están dentro del área del bate.
 	if body.name != "Timmy":
 		overlapping_bodies.append(body)
 
 func _on_body_exited(body):
-	# Quita los cuerpos que ya no están en el área del bat.
+	# Quita los cuerpos que ya no están en el área del bate.
 	overlapping_bodies.erase(body)
 
 func _process(delta):
 	if damage_done or not damage_enabled:
 		return
-	if anim.animation == "Swing" and anim.frame == DAMAGE_FRAME and overlapping_bodies.size() > 0:
+	if anim.animation == "Swing" and anim.frame in DAMAGE_FRAMES and overlapping_bodies.size() > 0:
 		for body in overlapping_bodies:
 			if body.has_method("take_damage") and body.name != "Timmy":
 				body.take_damage(BAT_DAMAGE)
-				print("Bat golpeó a ", body.name, " por ", BAT_DAMAGE, " de daño")
+				print("Bate golpeó a ", body.name, " por ", BAT_DAMAGE, " de daño")
 				damage_done = true
 				queue_free()
 				return

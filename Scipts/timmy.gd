@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-# Timmy es un enemigo que detecta a Ricky y lanza un murciélago cuando está cerca.
+# Timmy es un enemigo que detecta a Ricky y lanza un bate cuando está cerca.
 
 # Nodo de animación que controla las imágenes de Timmy.
 @onready var anim = $AnimatedSprite2D
@@ -60,8 +60,8 @@ func _on_animated_sprite_2d_animation_finished():
 	# Se ejecuta cuando termina cualquier animación de AnimatedSprite2D.
 	print("animacion terminó: ", anim.animation)
 	if anim.animation == "attack":
-		# Cuando termina el ataque, crea el murciélago y vuelve a idle.
-		spawn_bat()
+		# Cuando termina el ataque, busca posición para usar el bate, lo crea tras 1s y vuelve a idle.
+		await spawn_bat()
 		anim.play("idle")
 		await get_tree().create_timer(ATTACK_COOLDOWN).timeout
 		can_attack = true
@@ -80,9 +80,8 @@ func get_player_spawn_position(player):
 	return player.global_position
 
 func spawn_bat():
-	# Crea el murciélago y lo coloca en frente de Ricky.
-	print("spawneando bat")
-	var bat = BAT_SCENE.instantiate()
+	# Calcula una posición para usar el bate, espera 1 segundo y luego crea el bate allí.
+	print("Timmy buscando posición para usar el bate")
 	var player = get_node_or_null("/root/Game/Ricky")
 	var facing_left = false
 	var spawn_position = anim.global_position
@@ -90,11 +89,17 @@ func spawn_bat():
 		facing_left = player.global_position.x < global_position.x
 		var direction = -1 if facing_left else 1
 		spawn_position = get_player_spawn_position(player)
-		bat.global_position = spawn_position + Vector2(BAT_OFFSET_X * direction, BAT_OFFSET_Y)
+		spawn_position += Vector2(BAT_OFFSET_X * direction, BAT_OFFSET_Y)
 	else:
 		var direction = -1 if anim.flip_h else 1
-		bat.global_position = spawn_position + Vector2(BAT_OFFSET_X * direction, BAT_OFFSET_Y)
-	# Compensa el offset interno del prefab del bat para que aparezca en la posición correcta.
+		spawn_position = spawn_position + Vector2(BAT_OFFSET_X * direction, BAT_OFFSET_Y)
+
+	# Espera 0.3 segundos antes de crear y activar el bate (la animación del bate se iniciará al entrar al árbol de escenas).
+	await get_tree().create_timer(0.3).timeout
+	print("spawneando bate en ", spawn_position)
+	var bat = BAT_SCENE.instantiate()
+	bat.global_position = spawn_position
+	# Compensa el offset interno del prefab del bate para que aparezca en la posición correcta.
 	if bat.has_node("AnimatedSprite2D"):
 		bat.global_position += -bat.get_node("AnimatedSprite2D").position
 	bat.facing_left = facing_left
